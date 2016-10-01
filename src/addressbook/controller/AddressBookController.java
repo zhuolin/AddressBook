@@ -1,9 +1,9 @@
 package addressbook.controller;
 
 import java.util.TreeMap;
-
 import addressbook.entity.AddressBook;
 import addressbook.entity.AddressBookItem;
+
 
 public class AddressBookController {
 	private TreeMap<String, AddressBook> addressBookList;
@@ -19,6 +19,12 @@ public class AddressBookController {
 		this.username="ReeceAdmin";
 	}
 	
+	/**
+	 * adding contact entry to an addressbook
+	 * @param addressBookName
+	 * @param contact
+	 * @return true if insert successfully
+	 */
 	public boolean addContact(String addressBookName, AddressBookItem contact){
 		if(addressBookName == null || contact == null || "".equalsIgnoreCase(contact.getName())){
 			System.out.println("Address book could not found or contact is empty");
@@ -39,6 +45,12 @@ public class AddressBookController {
 		return true;
 	}
 	
+	/**
+	 * remove contact entry from an addressbook
+	 * @param addressBookName
+	 * @param contact
+	 * @return true if remove successfully otherwise, false
+	 */
 	public boolean removeContact(String addressBookName, AddressBookItem contact){
 		if(addressBookName == null || contact == null || "".equalsIgnoreCase(contact.getName())){
 			System.out.println("Address book could not found or contact is empty");
@@ -53,6 +65,10 @@ public class AddressBookController {
 		return true;
 	}
 	
+	/**
+	 * print all contacts in an address book
+	 * @param addressBookName
+	 */
 	public void printAddressBook(String addressBookName){
 		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
 			System.out.println("--Could not find address book with emtpy name--");
@@ -70,6 +86,11 @@ public class AddressBookController {
 		}
 	}
 	
+	/**
+	 * create an address book to the list
+	 * @param addressBookName
+	 * @return true if creation is successful
+	 */
 	public boolean createAddressBook(String addressBookName){
 		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
 			System.out.println("Could not create address book with emtpy name");
@@ -83,6 +104,11 @@ public class AddressBookController {
 		return true;
 	}
 	
+	/**
+	 * remove an address book
+	 * @param addressBookName
+	 * @return true if remove successfully
+	 */
 	public boolean removeAddressBook(String addressBookName){
 		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
 			System.out.println("Could not delete address book with emtpy name");
@@ -96,6 +122,9 @@ public class AddressBookController {
 		return false;
 	}
 	
+	/**
+	 * print all contact in all address books, phone numbers with same contact name will be concatenated 
+	 */
 	public void printGroupedContacts(){
 		TreeMap<String, String> uniqueContacts = new TreeMap<String, String>();
 		for(AddressBook book : addressBookList.values()){
