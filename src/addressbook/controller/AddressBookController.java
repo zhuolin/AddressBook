@@ -38,7 +38,12 @@ public class AddressBookController {
 		return false;
 	}
 	
-	public boolean addAddressBookName(String addressBookName){
+	public boolean addAddressBook(String addressBookName){
+		
+		return false;
+	}
+	
+	public boolean removeAddressBook(String addressBookName){
 		
 		return false;
 	}
