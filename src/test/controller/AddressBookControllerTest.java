@@ -9,25 +9,12 @@ import org.junit.Test;
 
 import addressbook.entity.AddressBookItem;
 
-public class AddressBookController {
+public class AddressBookControllerTest {
 	private addressbook.controller.AddressBookController controller;
-	private TreeMap<String, AddressBookItem> contactList1, contactList2;
 	
 	@Before
 	public void init(){
 		this.controller = new addressbook.controller.AddressBookController();
-		
-		
-		
-		this.contactList1 = new TreeMap<String,AddressBookItem>();
-		contactList1.put("Person1", new AddressBookItem("Person1","1111"));
-		contactList1.put("Person2", new AddressBookItem("Person2","2222"));
-		contactList1.put("Person3", new AddressBookItem("Person3","3333"));
-		
-		this.contactList2 = new TreeMap<String,AddressBookItem>();
-		contactList2.put("Person3", new AddressBookItem("Person3","3334"));
-		contactList2.put("Person5", new AddressBookItem("Person5","5555"));
-		contactList2.put("Person6", new AddressBookItem("Person6","6666"));
 	}
 
 	@Test
