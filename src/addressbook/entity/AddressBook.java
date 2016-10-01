@@ -6,6 +6,16 @@ public class AddressBook {
 	TreeMap<String, AddressBookItem> items;
 	String bookName;
 	
+	public AddressBook(String name){
+		this.bookName = name;
+		items = new TreeMap<String, AddressBookItem>();
+	}
+	
+	public AddressBook(){
+		this.bookName = "untitled";
+		items = new TreeMap<String, AddressBookItem>();
+	}
+	
 	public TreeMap<String, AddressBookItem> getItems() {
 		return items;
 	}

@@ -9,7 +9,7 @@ import addressbook.entity.AddressBook;
 import addressbook.entity.AddressBookItem;
 
 public class AddressBookTest {
-	private AddressBook addressBook;
+	private AddressBook addressBook,addressBook2;
 	private AddressBookItem item1, item2, item3, item4;
 	
 	@Before
@@ -26,6 +26,8 @@ public class AddressBookTest {
 		items.put(item4.getName(), item4);
 		this.addressBook.setItems(items);
 		this.addressBook.setBookName("Retail");
+		
+		addressBook2 = new AddressBook();
 	}
 	
 
@@ -34,6 +36,7 @@ public class AddressBookTest {
 		assertEquals(this.addressBook.getItems().size(), 4);
 		assertEquals("3333",this.addressBook.getItems().get("Person3").getPhone());
 		
+		assertEquals("untitled", addressBook2.getBookName());
 	}
 
 }

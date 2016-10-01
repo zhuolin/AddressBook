@@ -20,37 +20,102 @@ public class AddressBookController {
 	}
 	
 	public boolean addContact(String addressBookName, AddressBookItem contact){
-		
-		return false;
+		if(addressBookName == null || contact == null || "".equalsIgnoreCase(contact.getName())){
+			System.out.println("Address book could not found or contact is empty");
+			return false;
+		}
+		try{
+			if(addressBookList.get(addressBookName).getItems().containsKey(contact.getName())){
+				String cmbPhone = addressBookList.get(addressBookName).getItems().get(contact.getName()).getPhone() + ";" + contact.getPhone();
+				contact.setPhone(cmbPhone);
+				addressBookList.get(addressBookName).getItems().put(contact.getName(), contact);
+			}else{
+				addressBookList.get(addressBookName).getItems().put(contact.getName(), contact);
+			}
+		}catch(Exception e){
+			System.out.println("Could not find address book.");
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean removeContact(String addressBookName, AddressBookItem contact){
-		
-		return false;
+		if(addressBookName == null || contact == null || "".equalsIgnoreCase(contact.getName())){
+			System.out.println("Address book could not found or contact is empty");
+			return false;
+		}
+		try{
+			addressBookList.get(addressBookName).getItems().remove(contact.getName());
+		}catch(Exception e){
+			System.out.println("Error with removing contact from address book:"+addressBookName);
+			return false;
+		}
+		return true;
 	}
 	
 	public void printAddressBook(String addressBookName){
-		
+		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
+			System.out.println("--Could not find address book with emtpy name--");
+			return;
+		}
+		AddressBook book = addressBookList.get(addressBookName);
+		if(book == null || book.getItems() == null || book.getItems().size() == 0){
+			System.out.println("--address book (" + addressBookName + ") has no contacts--");
+			return;
+		}
+		//print address book
+		System.out.println("-- Address Book: " + addressBookName);
+		for(AddressBookItem item : book.getItems().values()){
+			System.out.println(" -" + item.getName() + ":" + item.getPhone());
+		}
 	}
 	
 	public boolean createAddressBook(String addressBookName){
-		
-		return false;
-	}
-	
-	public boolean addAddressBook(String addressBookName){
-		
-		return false;
+		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
+			System.out.println("Could not create address book with emtpy name");
+			return false;
+		}
+		if(addressBookList.containsKey(addressBookName)){
+			System.out.println("address book already exists.");
+			return false;
+		}
+		addressBookList.put(addressBookName, new AddressBook(addressBookName));
+		return true;
 	}
 	
 	public boolean removeAddressBook(String addressBookName){
-		
+		if(addressBookName == null || "".equalsIgnoreCase(addressBookName)){
+			System.out.println("Could not delete address book with emtpy name");
+			return false;
+		}
+		if(addressBookList.containsKey(addressBookName)){
+			addressBookList.remove(addressBookName);
+			return true;
+		}
+		System.out.println("address book does not exist.");
 		return false;
 	}
 	
 	public void printGroupedContacts(){
-		
-		
+		TreeMap<String, String> uniqueContacts = new TreeMap<String, String>();
+		for(AddressBook book : addressBookList.values()){
+			for(AddressBookItem item : book.getItems().values()){
+				if(uniqueContacts.containsKey(item.getName())){
+					String cmbPhone = uniqueContacts.get(item.getName()) + ";" + item.getPhone();
+					uniqueContacts.put(item.getName(),cmbPhone);
+				}else{
+					uniqueContacts.put(item.getName(), item.getPhone());
+				}
+			}
+		}
+		if(uniqueContacts.size()>0){
+			System.out.println("-- All contacts --");
+			for(String name : uniqueContacts.keySet()){
+				System.out.println(" -"+name+":"+uniqueContacts.get(name));
+			}
+		}else{
+			System.out.println("-- No contact exists in all address books --");
+		}
 	}
 
 	public TreeMap<String, AddressBook> getAddressBookList() {
